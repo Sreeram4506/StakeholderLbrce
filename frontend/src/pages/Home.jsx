@@ -17,9 +17,10 @@ export default function Home() {
   const navigate = useNavigate()
 
   function validate() {
-    if (!stakeholder) return 'Select stakeholder type'
-    if (!regno) return 'Enter registration number'
-    if (!/^[a-zA-Z0-9-]+$/.test(regno)) return 'Registration must be alphanumeric'
+    if (!stakeholder) return 'Please select stakeholder type'
+    if (stakeholder === 'Students' && !regno) return 'Please enter registration number'
+    if (regno && !/^[a-zA-Z0-9-]+$/.test(regno))
+      return 'Registration number must be alphanumeric'
     return ''
   }
 
@@ -29,25 +30,32 @@ export default function Home() {
     setError(err)
     if (!err) {
       const params = new URLSearchParams({ type: stakeholder, reg: regno })
-      navigate('/feedback?' + params.toString())
+      navigate('/stakeholder-info?' + params.toString())
     }
   }
 
   return (
     <div className="w-full max-w-md">
-      <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-        <div className="flex items-center gap-3 mb-4">
-          <div className="bg-[#e9eef8] text-[#273469] rounded-full p-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 12a4 4 0 100-8 4 4 0 000 8z" fill="#273469" />
-              <path d="M4 20a8 8 0 0116 0" fill="#273469" />
-            </svg>
-          </div>
-          <h3 className="text-lg font-semibold">Start Feedback</h3>
+
+      <div className="bg-white/85 backdrop-blur-md shadow rounded-2xl p-8 border border-gray-200">
+
+        {/* Title */}
+        <div className="text-center mb-6">
+          <img src="/clg-logo.png" className="h-16 mx-auto mb-3" />
+          <h2 className="text-xl font-semibold text-[#273469]">
+            Start Feedback Process
+          </h2>
+          <p className="text-sm text-gray-600 mt-1">
+            Your response helps us improve academic quality
+          </p>
         </div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">StakeHolder Type</label>
+
+        {/* Stakeholder */}
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Stakeholder Type
+        </label>
         <select
-          className="w-full border rounded p-2 mb-4"
+          className="w-full border border-gray-300 rounded-lg p-2.5 mb-4 focus:outline-none focus:ring-2 focus:ring-[#273469]"
           value={stakeholder}
           onChange={(e) => setStakeholder(e.target.value)}
         >
@@ -57,22 +65,36 @@ export default function Home() {
           ))}
         </select>
 
-        <label className="block text-sm font-medium text-gray-700 mb-2">Registration Number</label>
-        <input
-          className="w-full border rounded p-2 mb-4"
-          value={regno}
-          onChange={(e) => setRegno(e.target.value)}
-          placeholder="Enter registration number"
-        />
+        {/* Registration - Only for Students */}
+        {stakeholder === 'Students' && (
+          <>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Registration Number *
+            </label>
+            <input
+              className="w-full border border-gray-300 rounded-lg p-2.5 mb-4 focus:outline-none focus:ring-2 focus:ring-[#273469]"
+              value={regno}
+              onChange={(e) => setRegno(e.target.value)}
+              placeholder="Enter registration number"
+            />
+          </>
+        )}
 
-        {error && <div className="text-red-600 text-sm mb-3">{error}</div>}
+        {/* Error */}
+        {error && (
+          <div className="text-red-600 text-sm mb-4 text-center">
+            {error}
+          </div>
+        )}
 
+        {/* Button */}
         <button
-          className="w-full bg-[#273469] text-white py-2 rounded hover:opacity-95 transition"
+          className="w-full bg-[#273469] text-white py-2.5 rounded-lg font-medium hover:bg-[#1f2a57] transition"
           onClick={handleContinue}
         >
-          Continue
+          Continue to Feedback
         </button>
+
       </div>
     </div>
   )

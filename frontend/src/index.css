@@ -2,6 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-body { background-color: #f8fafc }
+/* ===== College Background with Gradient Overlay ===== */
+.bg-watermark {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
 
-.shadow { box-shadow: 0 6px 18px rgba(39,52,105,0.08) }
+  /* Background image */
+  background-image: url('/clg-bg.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+/* Academic gradient overlay */
+.bg-watermark::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  /* College-style blue gradient */
+  background: linear-gradient(
+    135deg,
+    rgba(39, 52, 105, 0.70),
+    rgba(245, 247, 255, 0.75)
+  );
+}
+
+/* ===== Global Body ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f8fafc;
+}
+
+/* ===== Reusable UI Gradients ===== */
+
+/* Primary button gradient */
+.btn-primary {
+  background: linear-gradient(
+    135deg,
+    #273469,
+    #3f4d9b
+  );
+  color: white;
+}
+
+/* Header gradient (optional) */
+.header-gradient {
+  background: linear-gradient(
+    90deg,
+    #273469,
+    #1f2a57
+  );
+}
+
+/* Card background */
+.card-glass {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(6px);
+}
+
+/* College-style shadow */
+.shadow {
+  box-shadow: 0 8px 24px rgba(39, 52, 105, 0.12);
+}

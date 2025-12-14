@@ -4,14 +4,28 @@ const Feedback = require('../models/Feedback');
 
 router.post('/', async (req, res) => {
   try {
-    const { stakeholderType, registrationNumber, name, email, rating, comments } = req.body;
-    if (!stakeholderType || !registrationNumber || !name || !email || !rating) {
+    const { 
+      stakeholderType, registrationNumber, name, email, mobile, department, designation, organizationAddress, facultyId, faculty,
+      facultyName, courseCode, teachingQuality, courseContent, communication, evaluationMethod, feedback,
+      curriculumReadiness, studentMotivation, criticalThinking, problemSolving, designThinking, softSkills,
+      practicalLearningImprovement, interdisciplinaryCourses, multiDisciplinaryCourses, entrepreneurshipCourses, industryMentorsWillingness,
+      comment
+    } = req.body;
+
+    if (!stakeholderType || !registrationNumber || !name || !email) {
       return res.status(400).json({ message: 'Missing required fields' });
     }
 
-    const feedback = new Feedback({ stakeholderType, registrationNumber, name, email, rating, comments });
-    await feedback.save();
-    res.status(201).json({ message: 'Feedback submitted', feedback });
+    const newFeedback = new Feedback({ 
+      stakeholderType, registrationNumber, name, email, mobile, department, designation, organizationAddress, facultyId, faculty,
+      facultyName, courseCode, teachingQuality, courseContent, communication, evaluationMethod, feedback,
+      curriculumReadiness, studentMotivation, criticalThinking, problemSolving, designThinking, softSkills,
+      practicalLearningImprovement, interdisciplinaryCourses, multiDisciplinaryCourses, entrepreneurshipCourses, industryMentorsWillingness,
+      comment
+    });
+    
+    await newFeedback.save();
+    res.status(201).json({ message: 'Feedback submitted', feedback: newFeedback });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Server error' });
