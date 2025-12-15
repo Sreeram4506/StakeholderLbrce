@@ -35,7 +35,8 @@ export default function Home() {
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-md mx-auto">
+
 
       <div className="bg-white/85 backdrop-blur-md shadow rounded-2xl p-8 border border-gray-200">
 
