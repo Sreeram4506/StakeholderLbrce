@@ -18,7 +18,7 @@ export default function App() {
       {/* Global Background */}
       <div className="bg-watermark" />
 
-      {/* 🔥 Apply overlay only for NON-Academics pages */}
+      {/* Overlay only for NON-Academics pages */}
       {!isAcademics && <div className="bg-overlay" />}
 
       {/* Header */}
@@ -29,9 +29,34 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/curriculum" element={<Home />} />
-          <Route path="/stakeholder-info" element={<StakeholderInfo />} />
-          <Route path="/feedback" element={<Feedback />} />
-          <Route path="/thankyou" element={<ThankYou />} />
+
+          {/* ✅ CENTERED PAGES */}
+          <Route
+            path="/stakeholder-info"
+            element={
+              <div className="flex justify-center">
+                <StakeholderInfo />
+              </div>
+            }
+          />
+
+          <Route
+            path="/feedback"
+            element={
+              <div className="flex justify-center">
+                <Feedback />
+              </div>
+            }
+          />
+
+          <Route
+            path="/thankyou"
+            element={
+              <div className="flex justify-center">
+                <ThankYou />
+              </div>
+            }
+          />
         </Routes>
       </main>
 
