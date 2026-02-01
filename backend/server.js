@@ -20,4 +20,9 @@ app.use('/api/feedback', feedbackRoutes);
 app.get('/', (req, res) => res.send({ message: 'Online Stakeholders Feedback API' }));
 
 const PORT = process.env.PORT || 5000;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Log environment for debugging
+console.log(`Starting server in ${NODE_ENV} mode on port ${PORT}`);
+
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
