@@ -13,3 +13,4 @@ build/
 # OS / junk files
 desktop.ini
 .DS_Store
+.env
