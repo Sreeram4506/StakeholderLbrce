@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+const API_URL = import.meta.env.VITE_API_URL;
 
 const selectOptions = ['--- Select ---', 'Excellent', 'Very Good', 'Good', 'Fair', 'Poor'];
-const departments = ['--- Select ---', 'CSE', 'ECE', 'MECH', 'CIVIL', 'EEE', 'CHEMICAL'];
+const departments = ['--- Select ---', 'CSE(AI&ML)', 'CSE', 'ECE', 'MECH', 'CIVIL', 'EEE'];
 
 export default function Feedback() {
   const [searchParams] = useSearchParams()
@@ -79,7 +80,8 @@ export default function Feedback() {
 
     setLoading(true)
     try {
-      const res = await fetch('/api/feedback', {
+      const res = await fetch(`${API_URL}/api/feedback`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
@@ -110,7 +112,8 @@ export default function Feedback() {
 
     setLoading(true)
     try {
-      const res = await fetch('/api/feedback', {
+      const res = await fetch(`${API_URL}/api/feedback`, {
+
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ 
