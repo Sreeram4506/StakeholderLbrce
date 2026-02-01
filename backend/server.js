@@ -9,15 +9,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/feedbackdb';
+const MONGO_URI = process.env.MONGO_URI;
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+
+mongoose.connect(MONGO_URI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
 app.use('/api/feedback', feedbackRoutes);
 
-app.get('/', (req, res) => res.send({ message: 'Online Stakeholders Feedback API' }));
+app.get('/', (req, res) =>
+  res.send({ message: 'Online Stakeholders Feedback API' })
+);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () =>
+  console.log(`Server running on port ${PORT}`)
+);
